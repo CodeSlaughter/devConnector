@@ -3,6 +3,7 @@ const router = express.Router();
 const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const passport = require('passport');
 
 
 const secret = process.env.SECRET || require('../../config/keys').secretOrKey
@@ -93,6 +94,14 @@ router.post('/login', (req, res) => {
                 })
                 .catch(err => console.log(err))
         })
+})
+
+//@route    GET api/users/current
+//@desc     return current user
+//@acess    Private
+
+router.get('/current', passport.authenticate('jwt', {session: false}), (req, res) => {
+    res.json(req.user)
 })
 
 module.exports = router;
