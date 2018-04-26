@@ -45,7 +45,32 @@ router.post('/register', (req, res) => {
                     })
                 })
             }
-        })
+        })    
 });
+//@route    GET api/users/login
+//@desc     Login User / returning jwt token
+//@acess    Public
+router.post('/login', (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    //Find User by email
+    User.findOne({email})
+        .then(user => {
+            if(!user){
+                return res.status(404).json({email: 'User not found'})
+            }
+
+            //check password
+            bcrypt.compare(password, user.password)
+                .then((isMatch) => {
+                    if(isMatch){
+                        res.json({msg: 'success'})
+                    } else {
+                        return res.status(400).json({password: 'password incorrect'})
+                    }
+                })
+        })
+})
 
 module.exports = router;
