@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import axios from 'axios';
 
 class Register extends Component {
   constructor(){
@@ -24,7 +25,10 @@ class Register extends Component {
       password: this.state.password,
       password2: this.state.password2
     }
-    console.log(newUser)
+    axios
+    .post('/api/users/register', newUser)
+    .then(res => console.log(res.data))
+    .catch(err => console.log(err.response.data))
   }
   render() {
     return (
@@ -40,7 +44,7 @@ class Register extends Component {
             </div>
             <div className="form-group">
               <input type="email" className="form-control form-control-lg" placeholder="Email Address" name="email" value={this.state.email} onChange={this.onChange} />
-              <small classNameName="form-text text-muted">This site uses Gravatar so if you want a profile image, use a Gravatar email</small>
+              <small className="form-text text-muted">This site uses Gravatar so if you want a profile image, use a Gravatar email</small>
             </div>
             <div className="form-group">
               <input type="password" className="form-control form-control-lg" placeholder="Password" name="password" value={this.state.password} onChange={this.onChange} />
