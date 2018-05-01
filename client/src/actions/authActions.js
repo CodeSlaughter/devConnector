@@ -45,6 +45,17 @@ export const loginUser = (userData) => dispatch => {
         dispatch({
             type: GET_ERRORS,
             payload: err.response.data
-        }));
+        })
+    );
 }
+
+// log user out
+export const logoutUser = () => dispatch => {
+    // remove token from local storage
+    localStorage.removeItem('jwtToken');
+    //remove auth header for future requests
+    setAuthToken(false);
+    //set current user to {} which will set isAuthenticated to false
+    dispatch(setCurrentUser({}));
+};
 
