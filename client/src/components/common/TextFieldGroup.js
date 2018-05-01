@@ -33,12 +33,12 @@ TextFormGroup.propTypes = {
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
-    info: PropTypes.string.isRequired,
-    error: PropTypes.string.isRequired,
+    info: PropTypes.string,
+    error: PropTypes.string,
     type: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
+    label: PropTypes.string,
     onChange: PropTypes.func.isRequired,
-    disabled: PropTypes.func.isRequired
+    disabled: PropTypes.string
   }
 
 TextFormGroup.defaultProps = {
