@@ -13,17 +13,17 @@ class Dashboard extends Component {
   render() {
     const { user } = this.props.auth;
     const { profile, loading } = this.props.profile;
-
-    let dashboarcContent;
+    let dashboardContent;
     
     if (profile === null || loading) {
-        dashboarcContent = <Spinner />
+        dashboardContent = <Spinner />
     } else {
-        if (Object.keys(profile) > 0 ){
-            dashboarcContent = <h4>TODO: DISPLAY PROFILE</h4>
+        if (Object.keys(profile).length > 0 ){
+            
+            dashboardContent = <h4>TODO: DISPLAY PROFILE</h4>
         } else {
             //User is logged in but doesnt have a profile
-            dashboarcContent = (
+            dashboardContent = (
                 <div>
                     <p className="lead text-muted">Welcome { user.name }</p>
                     <p>You have not yet setup a profile, please add some info</p>
@@ -44,7 +44,7 @@ class Dashboard extends Component {
                       <h1 className="display-4">
                           Dashboard
                       </h1>
-                      {dashboarcContent}
+                      {dashboardContent}
                   </div>
               </div>
           </div>
