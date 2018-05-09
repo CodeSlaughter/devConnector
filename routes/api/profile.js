@@ -199,7 +199,7 @@ router.post('/experience', passport.authenticate('jwt', { session: false}), (req
             // return any errors with 400 status
             return res.status(400).json(errors);
         } 
-    Profile.fineOne({ user: req.user.id })
+    Profile.findOne({ user: req.user.id })
     .then(profile => {
         const newExp = {
             title: req.body.title,
@@ -233,7 +233,7 @@ router.post('/education', passport.authenticate('jwt', { session: false}), (req,
             // return any errors with 400 status
             return res.status(400).json(errors);
         } 
-    Profile.fineOne({ user: req.user.id })
+    Profile.findOne({ user: req.user.id })
     .then(profile => {
         const newEdu = {
             school: req.body.school,
@@ -260,7 +260,7 @@ router.post('/education', passport.authenticate('jwt', { session: false}), (req,
 //@desc     Remove experience from profle
 //@acess    Private
 router.delete('/experience/:exp_id', passport.authenticate('jwt', { session: false}), (req, res) => {
-    Profile.fineOne({ user: req.user.id })
+    Profile.findOne({ user: req.user.id })
     .then(profile => {
             //get remove index
         const removeIndex = profile.experience
@@ -282,7 +282,7 @@ router.delete('/experience/:exp_id', passport.authenticate('jwt', { session: fal
 //@desc     Remove education from profle
 //@acess    Private
 router.delete('/education/:exp_id', passport.authenticate('jwt', { session: false}), (req, res) => {
-    Profile.fineOne({ user: req.user.id })
+    Profile.findOne({ user: req.user.id })
     .then(profile => {
             //get remove index
         const removeIndex = profile.education
@@ -304,7 +304,7 @@ router.delete('/education/:exp_id', passport.authenticate('jwt', { session: fals
 //@desc     Delete user and profile
 //@acess    Private
 router.delete('/', passport.authenticate('jwt', { session: false}), (req, res) => {
-    Profile.fineOneAndRemove({ user: req.user.id })
+    Profile.findOneAndRemove({ user: req.user.id })
     .then(() => {
         User.findOneAndRemove({ _id: req.user.id })
         .then(() => res.json({ success: true }))
