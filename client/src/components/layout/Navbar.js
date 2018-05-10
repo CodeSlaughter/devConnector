@@ -29,6 +29,9 @@ class Navbar extends Component {
              Logout
           </a>
         </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/dashboard">Dashboard</Link>
+        </li>
       </ul>
     )
 
