@@ -16,7 +16,7 @@ module.exports = function validateExperienceInput(data) {
         errors.degree = 'Degree field is required'
     }
     if (Validator.isEmpty(data.fieldOfStudy)){
-        errors.fieldOfStudy = 'Field of stufy is required'
+        errors.fieldOfStudy = 'Field of study is required'
     }
     if (Validator.isEmpty(data.from)){
         errors.from = 'From field is required'
