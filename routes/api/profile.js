@@ -126,6 +126,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
         profileFields.status = req.body.status;
     }
     if (req.body.githubusername) {
+        console.log(req.body.githubusername)
         profileFields.githubusername = req.body.githubusername;
     }
     //skills split into array
@@ -156,12 +157,14 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
     })
         .then(profile => {
             if (profile) {
+                console.log(profileFields)
                 Profile.findOneAndUpdate(
                     { user: req.user.id },
                     { $set: profileFields },
-                    { new: true }
+                    { $new: true }
                 )
                     .then((profile) => {
+                        console.log(profile)
                         res.json(profile)
                     })
                     .catch(err => console.log(err))
