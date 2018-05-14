@@ -11,7 +11,7 @@ export const addPost = postData => dispatch => {
         .post('/api/posts', postData)
         .then(res => dispatch({
             type: ADD_POST,
-            payload: red.data
+            payload: res.data
         }))
         .catch(er => dispatch({
             type: GET_ERRORS,
