@@ -162,7 +162,7 @@ router.post('/comment/:id', passport.authenticate('jwt', { session: false }), (r
             user: req.user.id,
         }
         // Add to comments array
-        post.comments.unshift({ newComment });
+        post.comments.unshift( newComment );
 
         //save
         post.save()

@@ -96,3 +96,17 @@ export const removeLike = id => dispatch => {
             payload: er.response.data
         }))
 }
+
+//Add comment
+export const addComment = (postId, commentData) => dispatch => {
+    axios
+        .post(`/api/posts/comment/${postId}`, commentData)
+        .then(res => dispatch({
+            type: GET_POST,
+            payload: res.data
+        }))
+        .catch(er => dispatch({
+            type: GET_ERRORS,
+            payload: er.response.data
+        }))
+}
