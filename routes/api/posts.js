@@ -176,11 +176,11 @@ router.post('/comment/:id', passport.authenticate('jwt', { session: false }), (r
 //@route    DELETE api/posts/comment/:id/:comment_id
 //@desc     Delete comment from post
 //@acess    Private
-router.delete('/comment/:id/comment_id', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.delete('/comment/:id/:comment_id', passport.authenticate('jwt', { session: false }), (req, res) => {
     Post.findById(req.params.id)
     .then(post => {
         //check to see if post exists
-        if (post.comments.filter(comment => comment._id.toString() === req.parems.comment_id).length === 0) {
+        if (post.comments.filter(comment => comment._id.toString() === req.params.comment_id).length === 0) {
             return res.status(404).json({ commentDoesntExist: 'Comment does not exist' });
         }
 
