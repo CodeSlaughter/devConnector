@@ -4,7 +4,8 @@ import {
     ADD_POST,
     GET_POSTS,
     GET_ERRORS,
-    POST_LOADING
+    POST_LOADING,
+    DELETE_POST
 } from './types'
 
 //Set loading state
@@ -41,5 +42,41 @@ export const getPosts = () => dispatch => {
         .catch(er => dispatch({
             type: GET_POSTS,
             payload: null
+        }))
+}
+
+//Delete post
+export const deletePost = id => dispatch => {
+    axios
+        .delete(`/api/posts/${id}`)
+        .then(res => dispatch({
+            type: DELETE_POST,
+            payload: id
+        }))
+        .catch(er => dispatch({
+            type: GET_ERRORS,
+            payload: er.response.data
+        }))
+}
+
+//Add like to a post
+export const addLike = id => dispatch => {
+    axios
+        .post(`/api/posts/like/${id}`)
+        .then(res => dispatch(getPosts()))
+        .catch(er => dispatch({
+            type: GET_ERRORS,
+            payload: er.response.data
+        }))
+}
+
+//Remove like from a post
+export const removeLike = id => dispatch => {
+    axios
+        .post(`/api/posts/unlike/${id}`)
+        .then(res => dispatch(getPosts()))
+        .catch(er => dispatch({
+            type: GET_ERRORS,
+            payload: er.response.data
         }))
 }
