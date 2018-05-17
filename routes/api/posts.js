@@ -31,7 +31,7 @@ router.get('/', (req, res) => {
 //@desc     Get Posts by id
 //@acess    Public
 router.get('/:id', (req, res) => {
-    Post.find()
+    Post.findById(req.params.id)
     .then(post => res.json(post))
     .catch(() => res.status(404).json({ noPostFound: 'No post found with that id' }))
 });

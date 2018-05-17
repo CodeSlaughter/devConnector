@@ -5,7 +5,8 @@ import {
     GET_POSTS,
     GET_ERRORS,
     POST_LOADING,
-    DELETE_POST
+    DELETE_POST,
+    GET_POST
 } from './types'
 
 //Set loading state
@@ -41,6 +42,21 @@ export const getPosts = () => dispatch => {
         }))
         .catch(er => dispatch({
             type: GET_POSTS,
+            payload: null
+        }))
+}
+
+//Get post
+export const getPost = (id) => dispatch => {
+    dispatch(setPostLoading());
+    axios
+        .get(`/api/posts/${id}`)
+        .then(res => dispatch({
+            type: GET_POST,
+            payload: res.data
+        }))
+        .catch(er => dispatch({
+            type: GET_POST,
             payload: null
         }))
 }
